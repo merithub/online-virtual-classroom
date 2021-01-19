@@ -49,7 +49,7 @@ namespace ConsoleApp6
     }
 }
 
-1. Get Session Token
+# 1. Get Session Token
 
 var client = new RestClient("https://s1.serviceaccounts.merithub.net/v1/bvgamh2ckrg7stsqi7hg/api/token");
 client.Timeout = -1;
@@ -60,7 +60,7 @@ request.AddParameter("grant_type", "urn:ietf:params:oauth:grant-type:jwt-bearer"
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 
-2. Add user in network
+# 2. Add user in network
 var client = new RestClient("https://s1.serviceaccounts.merithub.net/v1/bvgamh2ckrg7stsqi7hg/users");
 client.Timeout = -1;
 var request = new RestRequest(Method.POST);
@@ -69,7 +69,7 @@ request.AddHeader("Content-Type", "application/json");
 request.AddParameter("application/json", "{\n\t\"name\" : \"name\",\n\t\"title\" : \"software engineer\",\n\t\"img\" : \"image_url\",\n\t\"desc\" : \"this id demo user\",\n\t\"lang\" : \"en\",\n \"clientUserId\" : \"1234xyz\", \n\t\"email\" : \"email@xyz.abc\",\n\t\"role\" : \"M\",\n\t\"timeZone\" : \"Asia/Kolkata\",\n\t\"permission\" : \"CJ\"\n}\n", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
-3. To search a user in network
+# 3. To search a user in network
 
 var client = new RestClient("https://s1.serviceaccounts.merithub.net/v1/bvgamh2ckrg7stsqi7hg/users?query=email@xyz.abc");
 client.Timeout = -1;
@@ -78,7 +78,7 @@ request.AddHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 
-4. Schedule a class
+# 4. Schedule a class
 var client = new RestClient("https://s1.classes.merithub.net/v1/bvgamh2ckrg7stsqi7hg/bvgamh2ckrg7stsqi7hg");
 client.Timeout = -1;
 var request = new RestRequest(Method.POST);
