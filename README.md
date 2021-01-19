@@ -1,15 +1,16 @@
 # online-virtual-classroom
+
 Steps to integrate API:
-Create JWT token from the {CLIENT_ID}, {CLIENT_SECRET}
-Get authToken from MeritHub API
-Add users in your account and get their userId
-Schedule a class with authToken and userId
-Add/Remove users in class with classId, authToken & userId
-CLIENT_ID and networkId are the same.
+1.Create JWT token from the {CLIENT_ID}, {CLIENT_SECRET}
+2.Get authToken from MeritHub API
+3.Add users in your account and get their userId
+4.Schedule a class with authToken and userId
+5.Add/Remove users in class with classId, authToken & userId
+6.CLIENT_ID and networkId are the same.
 
 You can generate JWT in any language and integrate our API in any server side language. We are providing a PHP sample here. If you need the same in any other language, please contact us. 
 
-Create a jwt at your end to request a token (PHP).
+# Create a jwt at your end to request a token (PHP).
 Replace {CLIENT_ID}, {CLIENT_SECRET}  in php code.
 
 function base64url_encode($str) {
@@ -36,7 +37,7 @@ $jwt = generate_jwt($headers, $payload);
  
 echo $jwt;
 
-Get access_token from api
+# Get access_token from api
 
 Note: You can explore more about this standard at:
 https://developers.google.com/identity/protocols/oauth2/service-account
@@ -71,7 +72,7 @@ Response body:
 
 
 
-To request in php:
+# To request in php:
 
 
  
@@ -98,7 +99,7 @@ try {
 }
 
 
-Add users in account:
+# Add users in account:
 
 Endpoint : https://s1.serviceaccounts.merithub.net/v1/{networkId}/users
 
@@ -143,7 +144,7 @@ Response body:
 You may ignore this user specific user token.
 
 
-To search users:
+# To search users:
 
 Endpoint : https://s1.serviceaccounts.merithub.net/v1/{networkId}/users?query={email or clientUserId or Name}
 
@@ -192,7 +193,7 @@ Response body :
 
 
 
-Schedule a Class:
+# Schedule a Class:
 
 You can  schedule two types of classes. classType can be either oneTime or perma. In perma class, you can schedule the days for perma recurring classes. Perma class is scheduled only once and can be used as many as times you want to use. But one time class requires new class links to start every new session of online live class.
 
@@ -220,7 +221,7 @@ HEADER : “Authorization”: Bearer {AccessToken}
 Content-Type: application/json
 
 
-Request body to schedule a Class :
+# Request body to schedule a Class :
 
 
 {
@@ -269,7 +270,7 @@ https://live.merithub.com/info/room/{networkId}/{hostLink}
 If you want to show device test page, You may put additional query string like:
 https://live.merithub.com/info/room/{networkId}/{hostLink}?devicetest=true
  
-Edit Class
+# Edit Class
 You cannot change the type of class. You can edit the schedule only in case of perma class. On edit “type” parameter will be ignored.
 
 Endpoint : https://s1.classes.merithub.net/v1/{networkId}/{classId}
@@ -309,7 +310,7 @@ Response body :
    "message": "success"
 }
  
-Add users in class:
+# Add users in class:
  
 Endpoint :  https://s1.classes.merithub.net/v1/{networkId}/{classId}/users
 
@@ -345,7 +346,7 @@ Response body:
  
  
  
-Remove user from class
+# Remove user from class
 
 It removes the user from class. You have to send an array of userIds of those users who you want to remove from the class.
 
@@ -361,6 +362,7 @@ Content-Type: application/json
 If your class has only one host , then you cannot remove that one host from the class as class requires at least one host.
 
 Request body :
+
 {
    "users": [
        "User_ID_1",
@@ -371,7 +373,7 @@ Request body :
   
  
  
-Web hook to ping status, of classes, recording, attendance and content:
+# Web hook to ping status, of classes, recording, attendance and content:
  
 Sample Webhook Url:  https://yoururl.com/merithubstatuspings
 Method: POST
@@ -379,7 +381,8 @@ Method: POST
  
 You will receive the following data at status ping url for different objects:
  
-Class is live
+# Class is live
+
 Body:
 {
    "networkId": "network_Id",
@@ -388,7 +391,8 @@ Body:
    "subClassId":"subClassId"
 }
  
-Class has ended
+# Class has ended
+
 {
    "networkId": "network_Id",
    "classId": "class_Id",
@@ -396,28 +400,32 @@ Class has ended
    "subClassId":"subClassId"
 }
  
-Class is cancelled
+# Class is cancelled
+
 {
    "networkId": "network_Id",
    "classId": "class_Id",
    "status": "cl"
 }
  
-Class is expired
+# Class is expired
+
 {
    "networkId": "network_Id",
    "classId": "class_Id",
    "status": "ex"
 }
  
-When class has been edited
+# When class has been edited
+
 {
  "networkId": "network_Id",
    "classId": "class_Id",
    "status": "up"
 }
  
-       6)   on uploading any file in library
+ # 6)   on uploading any file in library
+       
 {
    "networkId": "Network___ID",
    "userId": "Class____ID",
@@ -426,7 +434,8 @@ When class has been edited
    "convertedUrl": "Converted_File_Link"
 }
  
-7)When class has ended and attendance has been generated:
+# 7)When class has ended and attendance has been generated:
+
 {
    "networkId": "Network___ID",
    "classId": "Class____ID",
@@ -434,7 +443,8 @@ When class has been edited
    "attendance": ["array of attendance"]
 }
  
-8) When recording is available
+# 8) When recording is available
+
 {
    "networkId": "Network___ID",
    "classId": "Class____ID",
